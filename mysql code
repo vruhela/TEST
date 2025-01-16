@@ -51,6 +51,60 @@ d. SELECT BOOKS.BID, BOOKS.BNAME, BOOKS.AUNAME, ISSUED.QTY_ISSUED
    FROM BOOKS
    INNER JOIN ISSUED
    ON BOOKS.BID = ISSUED.BID
+
+
+
+
+
+
+import csv
+
+def ADD():
+    # Open the file in append mode so multiple records can be added
+    f = open("furniture.csv", "a", newline="")
+    writer = csv.writer(f)
+    
+    # Input details for a furniture item
+    Fur_id = input("Enter Furniture ID: ")
+    Description = input("Enter Description: ")
+    Price = input("Enter Price: ")
+    Discount = input("Enter Discount: ")
+    
+    # Add the record as a list
+    d = [Fur_id, Description, Price, Discount]
+    writer.writerow(d)
+    print("Record added successfully!")
+    f.close()
+
+def DISPLAY():
+    try:
+        # Open the file in read mode
+        f = open("furniture.csv", "r")
+        reader = csv.reader(f)
+        
+        print("Furniture Records:")
+        for record in reader:
+            print(record)
+        f.close()
+    except FileNotFoundError:
+        print("No records found. The file does not exist.")
+
+# Menu to select actions
+while True:
+    print("\n1. To add data in furniture")
+    print("2. To display records")
+    print("3. To exit")
+    ch = int(input("Enter your choice: "))
+    if ch == 1:
+        ADD()
+    elif ch == 2:
+        DISPLAY()
+    elif ch == 3:
+        print("Exiting the program. Goodbye!")
+        break
+    else:
+        print("Invalid choice! Please try again.")
+
    WHERE BOOKS.PRICE BETWEEN 200 AND 400;
 
 
